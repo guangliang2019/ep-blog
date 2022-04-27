@@ -10,13 +10,15 @@
 </template>
 
 <script>
+import { defineComponent } from "@vue/runtime-core";
 import Header from "../components/header/Header.vue";
 
-export default {
+export default defineComponent({
+  name: "Layout",
   components: {
     Header,
   },
-};
+});
 </script>
 
 <style lang="less">

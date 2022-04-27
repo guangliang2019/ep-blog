@@ -8,6 +8,9 @@ import ArcoVue from "@arco-design/web-vue";
 import ArcoVueIcon from "@arco-design/web-vue/es/icon";
 import "./style/arco.css";
 
+// media query
+import "./utils/media.css";
+
 // cloudbase
 
 createApp(App)

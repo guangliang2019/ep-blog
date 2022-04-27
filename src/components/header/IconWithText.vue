@@ -1,9 +1,40 @@
 <template>
-  <div>Header</div>
+  <div class="icon-with-text">
+    <slot></slot>
+  </div>
 </template>
 
-<script lang="ts">
-export default {};
+<script>
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "IconWithText",
+});
 </script>
 
-<style></style>
+<style lang="less">
+//Common Style
+.icon-with-text {
+  width: 48px;
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 16px;
+  padding: 0 4px;
+  user-select: none;
+  cursor: pointer;
+}
+.icon-with-text:hover {
+  color: rgba(var(--primary-5));
+}
+
+//Media Query
+@media screen and (max-width: 991px) {
+  .icon-with-text {
+    width: 32px;
+    height: 36px;
+    flex-direction: column;
+  }
+}
+</style>
