@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import store from "../store/index";
 import Home from "../views/Home.vue";
 import Layout from "../views/Layout.vue";
 
@@ -28,6 +29,13 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach(() => {
+  if (!store.state.userName) {
+    console.log("滚去登录");
+    return false;
+  }
 });
 
 export default router;

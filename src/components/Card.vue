@@ -64,5 +64,11 @@ export default defineComponent({
   .arco-tabs-nav-type-line .arco-tabs-tab {
     margin: 7px 16px 0;
   }
+  .arco-tabs-content {
+    padding-top: 0;
+  }
+  .arco-tabs-nav::before {
+    transition: background-color 340ms;
+  }
 }
 </style>

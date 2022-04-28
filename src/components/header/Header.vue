@@ -57,11 +57,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "@vue/runtime-core";
-import to from "@/router/to";
+import { defineComponent, onBeforeMount, ref } from "@vue/runtime-core";
 import type { Theme } from "@/utils/constants";
 import Logo from "../Logo.vue";
 import IconWithText from "./IconWithText.vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 // TODO: 头像需要从用户信息获取，用户信息应该是全局状态
 
@@ -72,35 +73,46 @@ export default defineComponent({
     IconWithText,
   },
   setup() {
+    //用户数据相关
+    const store = useStore();
+    const userName = store.state.userName;
+
     //主题相关
-    const theme = ref<Theme>("light");
+    const theme = ref<Theme>(
+      localStorage.getItem("arco-theme") === "dark" ? "dark" : "light"
+    );
+    onBeforeMount(() => {
+      document.body.setAttribute("arco-theme", theme.value);
+    });
+
     const changeTheme = (): void => {
       switch (document.body.getAttribute("arco-theme")) {
         case "dark":
           document.body.setAttribute("arco-theme", "light");
-          localStorage.setItem("theme", "light");
+          localStorage.setItem("arco-theme", "light");
           theme.value = "light";
           break;
-        case "light":
-          document.body.setAttribute("arco-theme", "dark");
-          localStorage.setItem("theme", "dark");
-          theme.value = "dark";
-          break;
         default:
+          document.body.setAttribute("arco-theme", "dark");
+          localStorage.setItem("arco-theme", "dark");
+          theme.value = "dark";
           break;
       }
     };
 
     //导航栏路由相关
-    const toHome = to("/");
-    const toQA = to("/qa");
-    const toNotice = to("/notice");
-    const toStar = to("/star");
-    const toHistory = to("/history");
-    const toCreate = to("/create");
-    const toLogin = to("/login");
+    const router = useRouter();
+    const toHome = () => router.push("/about");
+    const toQA = () => router.push("/qa");
+    const toNotice = () => router.push("/notice");
+    const toStar = () => router.push("/star");
+    const toHistory = () => router.push("/history");
+    const toCreate = () => router.push("/create");
+    const toLogin = () => router.push("/login");
 
     return {
+      //用户
+      userName,
       //主题
       theme,
       changeTheme,

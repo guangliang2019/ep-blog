@@ -3,7 +3,13 @@
     <a-row :gutter="16" class="home-blog-row">
       <a-col :md="18" :sm="24" :xs="24" :lg="18">
         <Card :title="['关注', '推荐', '热榜']" style="min-height: 75vh">
-          <template #关注>1</template>
+          <template #关注>
+            <BlogItem
+              v-for="item in blogList"
+              :key="item.id"
+              :blogItem="item"
+            ></BlogItem>
+          </template>
           <template #推荐>2</template>
           <template #热榜>3</template>
         </Card>
@@ -20,15 +26,18 @@
 <script lang="ts">
 import { defineComponent, onBeforeMount, ref } from "@vue/runtime-core";
 import Card from "@/components/Card.vue";
+import BlogItem from "@/components/BlogItem.vue";
+
 import { BLOG_LIST } from "./mock";
 import type { Blog } from "@/utils/constants";
 
 export default defineComponent({
   components: {
     Card,
+    BlogItem,
   },
   setup() {
-    const blogList = ref<Array<Blog>>([]);
+    const blogList = ref<Array<Blog>>(BLOG_LIST);
 
     //请求相关
     const getBlogList = (): void => {

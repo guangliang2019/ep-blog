@@ -23,7 +23,7 @@ export default defineComponent({
 
 <style lang="less">
 * {
-  transition: 340ms background-color;
+  transition: 340ms background-color, 340ms border-color;
 }
 body {
   background-color: var(--color-bg-1);
@@ -38,11 +38,11 @@ body {
   z-index: 1000;
   position: fixed;
   background-color: var(--color-bg-4);
-  transition: 340ms background-color;
   box-shadow: 0px 4px 36px -8px rgba(black, 0.08);
   width: 100vw;
   display: flex;
   justify-content: center;
+  border-bottom: 1px solid var(--color-border);
 }
 .arco-layout-content {
   padding-top: 56px;
